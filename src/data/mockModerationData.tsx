@@ -64,7 +64,7 @@ export const mockUsers: User[] = [
   },
 ];
 
-export const mockChatMessage: ChatMessage[] = [
+export const mockMessages: ChatMessage[] = [
   {
     id: "msg-1",
     userId: "user-2",
@@ -155,14 +155,14 @@ export const mockChatMessage: ChatMessage[] = [
   },
 ];
 
-export const mockReport: Report[] = [
+export const mockReports: Report[] = [
   {
     id: "rep-1",
     messageId: "msg-3",
     reportedUserId: "user-4",
     reporterUserId: "user-2",
     reason: "Possible ban evasion and targeted comments toward moderators.",
-    status: "actioned",
+    status: "reviewing",
     severity: "high",
     createdAt: "2026-07-08T18:31:10Z",
     assignedModeratorId: "user-3",
@@ -174,7 +174,7 @@ export const mockReport: Report[] = [
     reporterUserId: "user-3",
     reason:
       "User suggested creating another account to avoid moderation actions.",
-    status: "actioned",
+    status: "new",
     severity: "high",
     createdAt: "2026-07-08T18:31:22Z",
     assignedModeratorId: "user-3",
@@ -218,7 +218,7 @@ export const mockModerationAction: ModerationAction[] = [
   },
 ];
 
-export const mockAppeal: Appeal[] = [
+export const mockAppeals: Appeal[] = [
   {
     id: "appeal-1",
     userId: "user-4",

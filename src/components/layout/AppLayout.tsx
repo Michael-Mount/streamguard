@@ -10,7 +10,7 @@ export default function AppLayout() {
           <NavLink to="/dashboard">Dashboard</NavLink>
           <NavLink to="/reports">Reports</NavLink>
           <NavLink to="/users">Users</NavLink>
-          <NavLink to="/appeals">Appels</NavLink>
+          <NavLink to="/appeals">Appeals</NavLink>
           <NavLink to="/settings">Settings</NavLink>
         </nav>
       </header>
