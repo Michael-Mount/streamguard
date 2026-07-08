@@ -1,0 +1,234 @@
+import type {
+  User,
+  Channel,
+  ChatMessage,
+  Report,
+  ModerationAction,
+  Appeal,
+} from "../types/moderation";
+
+export const mockChannel: Channel[] = [
+  {
+    id: "channel-1",
+    name: "mmount",
+    ownerId: "user-1",
+    shieldModeEnabled: true,
+  },
+];
+
+export const mockUsers: User[] = [
+  {
+    id: "user-1",
+    username: "mmount",
+    displayName: "MMount",
+    role: "streamer",
+    createdAt: "2020-04-14T16:20:00Z",
+    riskScore: 2,
+    isBanned: false,
+  },
+  {
+    id: "user-2",
+    username: "pixelKnight",
+    displayName: "PixelKnight",
+    role: "viewer",
+    createdAt: "2026-07-01T12:00:00Z",
+    riskScore: 8,
+    isBanned: false,
+  },
+  {
+    id: "user-3",
+    username: "novaMender",
+    displayName: "NovaMender",
+    role: "head_moderator",
+    createdAt: "2022-07-01T15:00:00Z",
+    riskScore: 1,
+    isBanned: false,
+  },
+  {
+    id: "user-4",
+    username: "raidShadow42",
+    displayName: "RaidShadow42",
+    role: "viewer",
+    createdAt: "2021-08-02T11:00:00Z",
+    riskScore: 84,
+    isBanned: true,
+  },
+  {
+    id: "user-5",
+    username: "cozyRaptor97",
+    displayName: "CozyRaptor97",
+    role: "viewer",
+    createdAt: "2024-12-09T18:00:00Z",
+    riskScore: 18,
+    isBanned: false,
+  },
+];
+
+export const mockChatMessage: ChatMessage[] = [
+  {
+    id: "msg-1",
+    userId: "user-2",
+    channelId: "channel-1",
+    text: "First time catching the stream live — good luck on the boss!",
+    createdAt: "2026-07-08T18:30:00Z",
+    riskLevel: "low",
+    riskScore: 2,
+    status: "approved",
+    automodReasons: [],
+  },
+  {
+    id: "msg-2",
+    userId: "user-5",
+    channelId: "channel-1",
+    text: "That parry timing was clean. Nice recovery.",
+    createdAt: "2026-07-08T18:30:01Z",
+    riskLevel: "low",
+    riskScore: 1,
+    status: "approved",
+    automodReasons: [],
+  },
+  {
+    id: "msg-3",
+    userId: "user-4",
+    channelId: "channel-1",
+    text: "Your mods are useless, unban my other account already.",
+    createdAt: "2026-07-08T18:30:09Z",
+    riskLevel: "high",
+    riskScore: 82,
+    status: "held",
+    automodReasons: ["Possible ban evasion", "Targeted moderator harassment"],
+  },
+  {
+    id: "msg-4",
+    userId: "user-3",
+    channelId: "channel-1",
+    text: "Reminder: keep spoilers out of chat until after the run.",
+    createdAt: "2026-07-08T18:30:14Z",
+    riskLevel: "low",
+    riskScore: 1,
+    status: "approved",
+    automodReasons: [],
+  },
+  {
+    id: "msg-5",
+    userId: "user-2",
+    channelId: "channel-1",
+    text: "No spoilers, chat. Let him figure out the puzzle.",
+    createdAt: "2026-07-08T18:30:45Z",
+    riskLevel: "low",
+    riskScore: 3,
+    status: "approved",
+    automodReasons: [],
+  },
+  {
+    id: "msg-6",
+    userId: "user-5",
+    channelId: "channel-1",
+    text: "That build is kind of cheesy, but it works lol.",
+    createdAt: "2026-07-08T18:30:50Z",
+    riskLevel: "medium",
+    riskScore: 34,
+    status: "approved",
+    automodReasons: ["Potentially negative gameplay comment"],
+  },
+  {
+    id: "msg-7",
+    userId: "user-4",
+    channelId: "channel-1",
+    text: "I can just make a new account if you keep timing me out.",
+    createdAt: "2026-07-08T18:30:55Z",
+    riskLevel: "high",
+    riskScore: 88,
+    status: "held",
+    automodReasons: ["Ban evasion risk", "Prior enforcement history"],
+  },
+  {
+    id: "msg-8",
+    userId: "user-2",
+    channelId: "channel-1",
+    text: "GG — shield mode is actually keeping chat readable tonight.",
+    createdAt: "2026-07-08T18:30:59Z",
+    riskLevel: "low",
+    riskScore: 1,
+    status: "approved",
+    automodReasons: [],
+  },
+];
+
+export const mockReport: Report[] = [
+  {
+    id: "rep-1",
+    messageId: "msg-3",
+    reportedUserId: "user-4",
+    reporterUserId: "user-2",
+    reason: "Possible ban evasion and targeted comments toward moderators.",
+    status: "actioned",
+    severity: "high",
+    createdAt: "2026-07-08T18:31:10Z",
+    assignedModeratorId: "user-3",
+  },
+  {
+    id: "rep-2",
+    messageId: "msg-7",
+    reportedUserId: "user-4",
+    reporterUserId: "user-3",
+    reason:
+      "User suggested creating another account to avoid moderation actions.",
+    status: "actioned",
+    severity: "high",
+    createdAt: "2026-07-08T18:31:22Z",
+    assignedModeratorId: "user-3",
+  },
+  {
+    id: "rep-3",
+    messageId: "msg-6",
+    reportedUserId: "user-5",
+    reporterUserId: "user-2",
+    reason:
+      "Message was reported as unnecessarily negative toward gameplay choices.",
+    status: "actioned",
+    severity: "medium",
+    createdAt: "2026-07-08T18:31:40Z",
+    assignedModeratorId: "user-3",
+  },
+];
+
+export const mockModerationAction: ModerationAction[] = [
+  {
+    id: "act-1",
+    type: "warn_user",
+    targetedUSerID: "user-5",
+    moderatorId: "user-3",
+    messageId: "msg-6",
+    reportedId: "rep-3",
+    reason:
+      "Viewer was warned to keep gameplay feedback constructive and avoid repeated negative comments.",
+    createdAt: "2026-07-08T18:32:05Z",
+  },
+  {
+    id: "act-2",
+    type: "ban_user",
+    targetedUSerID: "user-4",
+    moderatorId: "user-3",
+    messageId: "msg-7",
+    reportedId: "rep-2",
+    reason:
+      "User was banned for ban evasion risk and repeated disruptive behavior after prior enforcement.",
+    createdAt: "2026-07-08T18:32:30Z",
+  },
+];
+
+export const mockAppeal: Appeal[] = [
+  {
+    id: "appeal-1",
+    userId: "user-4",
+    moderationActionId: "act-2",
+    status: "rejected",
+    message:
+      "I was frustrated and should not have said that. I would like another chance to participate in chat.",
+    decisionNote:
+      "Appeal rejected because the account showed repeated ban evasion signals and continued disruptive behavior after prior moderation actions.",
+    createdAt: "2026-07-08T18:40:00Z",
+    reviewedAt: "2026-07-08T19:05:00Z",
+  },
+];
