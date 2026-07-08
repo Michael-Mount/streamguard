@@ -1,0 +1,44 @@
+.app-layout {
+  min-height: 100vh;
+  background-color: #0f1117;
+  color: #f4f4f5;
+}
+
+.app-header {
+  height: 64px;
+  border-bottom: 1px solid #27272a;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  background: #18181b;
+}
+
+.logo {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
+  color: #a1a1aa;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.nav-links a:hover {
+  color: #ffffff;
+}
+
+.nav-links a.active {
+  color: #a970ff;
+}
+
+.main-content {
+  padding: 32px;
+}
