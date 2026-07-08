@@ -64,7 +64,7 @@ export const mockUsers: User[] = [
   },
 ];
 
-export const mockChatMessage: ChatMessage[] = [
+export const mockMessages: ChatMessage[] = [
   {
     id: "msg-1",
     userId: "user-2",

@@ -1,6 +1,6 @@
 import {
   mockUsers,
-  mockChatMessage,
+  mockMessages,
   mockReport,
   mockAppeal,
 } from "../data/mockModerationData";
@@ -8,11 +8,11 @@ import {
 import MeticCard from "../components/ui/MetricCard/MetricCard";
 
 export default function Dashboard() {
-  const heldMessages = mockChatMessage.filter((msg) => {
+  const heldMessages = mockMessages.filter((msg) => {
     return msg.status == "held";
   });
 
-  const highRiskMessages = mockChatMessage.filter((msg) => {
+  const highRiskMessages = mockMessages.filter((msg) => {
     return msg.riskLevel == "high";
   });
 
@@ -26,7 +26,7 @@ export default function Dashboard() {
       <p>Overview of live moderation activity.</p>
       <div className="metric-cards-wrapper">
         <MeticCard title="users" value={mockUsers.length} />
-        <MeticCard title="chat messages" value={mockChatMessage.length} />
+        <MeticCard title="chat messages" value={mockMessages.length} />
         <MeticCard title="reports" value={mockReport.length} />
         <MeticCard title="appeals" value={mockAppeal.length} />
         <MeticCard title="held messages" value={heldMessages.length} />
