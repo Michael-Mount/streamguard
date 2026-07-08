@@ -1,4 +1,4 @@
-export default function Appeals() {
+export default function Reports() {
   return (
     <>
       <h1>Reports</h1>

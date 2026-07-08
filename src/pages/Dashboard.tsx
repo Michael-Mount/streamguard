@@ -1,4 +1,4 @@
-export default function Appeals() {
+export default function Dashboard() {
   return (
     <>
       <h1>DashBoard</h1>
