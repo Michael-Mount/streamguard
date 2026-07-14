@@ -7,23 +7,23 @@ import {
   mockAppeals,
 } from "../data/mockModerationData";
 
-import MeticCard from "../components/ui/MetricCard/MetricCard";
+import MetricCard from "../components/ui/MetricCard/MetricCard";
 import ChatMessageCard from "../components/moderation/ChatMessageCard/ChatMessageCard";
 
 export default function Dashboard() {
-  const [message, setMessages] = useState(mockMessages);
+  const [messages, setMessages] = useState(mockMessages);
   const [users, setUsers] = useState(mockUsers);
 
   const openReports = mockReports.filter((report) => {
-    return report.status == "new" || report.status == "reviewing";
+    return report.status === "new" || report.status === "reviewing";
   }).length;
 
-  const heldMessages = mockMessages.filter((msg) => {
-    return msg.status == "held";
+  const heldMessages = messages.filter((msg) => {
+    return msg.status === "held";
   }).length;
 
-  const highRiskMessages = mockMessages.filter((msg) => {
-    return msg.riskLevel == "high";
+  const highRiskMessages = messages.filter((msg) => {
+    return msg.riskLevel === "high";
   }).length;
 
   const bannedUsers = users.filter((user) => user.isBanned).length;
@@ -103,40 +103,40 @@ export default function Dashboard() {
       <h1> Dashboard</h1>
       <p>Overview of live moderation activity.</p>
       <div className="metric-cards-wrapper">
-        <MeticCard
+        <MetricCard
           title="users"
           value={mockUsers.length}
-          desciprtion="Total Watching Viewers"
+          description="Total Watching Viewers"
         />
-        <MeticCard
+        <MetricCard
           title="chat messages"
           value={mockMessages.length}
-          desciprtion="total messages this stream"
+          description="total messages this stream"
         />
-        <MeticCard
+        <MetricCard
           title="open reports"
           value={openReports}
-          desciprtion="Reports needing review"
+          description="Reports needing review"
         />
-        <MeticCard
+        <MetricCard
           title="appeals"
           value={mockAppeals.length}
-          desciprtion="Appeals needing review"
+          description="Appeals needing review"
         />
-        <MeticCard
+        <MetricCard
           title="held messages"
           value={heldMessages}
-          desciprtion="Messages needing review"
+          description="Messages needing review"
         />
-        <MeticCard
+        <MetricCard
           title="high-risk messages"
           value={highRiskMessages}
-          desciprtion="High Risk messages"
+          description="High Risk messages"
         />
-        <MeticCard
+        <MetricCard
           title="banned users"
           value={bannedUsers}
-          desciprtion="Total Banned Users"
+          description="Total Banned Users"
         />
       </div>
 
@@ -149,7 +149,7 @@ export default function Dashboard() {
         </div>
 
         <div className="chat-box-wrapper">
-          {message.map((msg) => {
+          {messages.map((msg) => {
             const user = users.find((user) => {
               return user.id === msg.userId;
             });
@@ -170,7 +170,7 @@ export default function Dashboard() {
                 autoMod={msg.automodReasons}
                 message={msg.text}
                 onApproveMessage={handleApproveMessage}
-                onDeletedMessage={handleDeleteMessage}
+                onDeleteMessage={handleDeleteMessage}
                 onBanUser={handleBanUser}
                 onHandleTimeout={handleTimeoutUser}
                 onWarning={handleWarningUser}

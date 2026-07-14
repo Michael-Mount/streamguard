@@ -10,7 +10,7 @@ type ChatMsgProps = {
   user: string;
   autoMod: string[];
   onApproveMessage: (messageId: string) => void;
-  onDeletedMessage: (messageId: string) => void;
+  onDeleteMessage: (messageId: string) => void;
   onBanUser: (userId: string) => void;
   onHandleTimeout: (userId: string) => void;
   onWarning: (userId: string) => void;
@@ -26,7 +26,7 @@ export default function ChatMessageCard({
   isBanned,
   autoMod,
   onApproveMessage,
-  onDeletedMessage,
+  onDeleteMessage,
   onBanUser,
   onHandleTimeout,
   onWarning,
@@ -81,7 +81,7 @@ export default function ChatMessageCard({
         </button>
         <button
           className="action-button"
-          onClick={() => onDeletedMessage(messageId)}
+          onClick={() => onDeleteMessage(messageId)}
         >
           Delete
         </button>
