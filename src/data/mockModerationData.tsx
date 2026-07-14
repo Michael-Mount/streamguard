@@ -25,6 +25,7 @@ export const mockUsers: User[] = [
     createdAt: "2020-04-14T16:20:00Z",
     riskScore: 2,
     isBanned: false,
+    warningCount: 0,
   },
   {
     id: "user-2",
@@ -34,6 +35,7 @@ export const mockUsers: User[] = [
     createdAt: "2026-07-01T12:00:00Z",
     riskScore: 8,
     isBanned: false,
+    warningCount: 2,
   },
   {
     id: "user-3",
@@ -43,6 +45,7 @@ export const mockUsers: User[] = [
     createdAt: "2022-07-01T15:00:00Z",
     riskScore: 1,
     isBanned: false,
+    warningCount: 0,
   },
   {
     id: "user-4",
@@ -52,6 +55,7 @@ export const mockUsers: User[] = [
     createdAt: "2021-08-02T11:00:00Z",
     riskScore: 84,
     isBanned: true,
+    warningCount: 0,
   },
   {
     id: "user-5",
@@ -61,6 +65,7 @@ export const mockUsers: User[] = [
     createdAt: "2024-12-09T18:00:00Z",
     riskScore: 18,
     isBanned: false,
+    warningCount: 0,
   },
 ];
 

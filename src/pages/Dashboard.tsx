@@ -26,9 +26,7 @@ export default function Dashboard() {
     return msg.riskLevel == "high";
   }).length;
 
-  const bannedUsers = mockUsers.filter((user) => {
-    return user.isBanned;
-  }).length;
+  const bannedUsers = users.filter((user) => user.isBanned).length;
 
   function handleApproveMessage(messageId: string) {
     setMessages((currentMessages) =>
@@ -53,6 +51,48 @@ export default function Dashboard() {
         return {
           ...message,
           status: "deleted",
+        };
+      }),
+    );
+  }
+
+  function handleBanUser(userId: string) {
+    setUsers((currentUsers) =>
+      currentUsers.map((user) => {
+        if (user.id !== userId) {
+          return user;
+        }
+        return {
+          ...user,
+          isBanned: true,
+        };
+      }),
+    );
+  }
+
+  function handleTimeoutUser(userId: string) {
+    setUsers((currentUsers) =>
+      currentUsers.map((user) => {
+        if (user.id !== userId) {
+          return user;
+        }
+        return {
+          ...user,
+          timeoutUntil: "2026-07-10T00:00:00Z",
+        };
+      }),
+    );
+  }
+
+  function handleWarningUser(userId: string) {
+    setUsers((currentUsers) =>
+      currentUsers.map((user) => {
+        if (user.id !== userId) {
+          return user;
+        }
+        return {
+          ...user,
+          warningCount: (user.warningCount ?? 0) + 1,
         };
       }),
     );
@@ -123,12 +163,17 @@ export default function Dashboard() {
                 key={msg.id}
                 messageId={msg.id}
                 user={user.displayName}
+                userId={user.id}
+                isBanned={user.isBanned}
                 status={msg.status}
                 risk={msg.riskLevel}
                 autoMod={msg.automodReasons}
                 message={msg.text}
                 onApproveMessage={handleApproveMessage}
                 onDeletedMessage={handleDeleteMessage}
+                onBanUser={handleBanUser}
+                onHandleTimeout={handleTimeoutUser}
+                onWarning={handleWarningUser}
               />
             );
           })}
