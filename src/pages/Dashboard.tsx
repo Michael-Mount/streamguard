@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import {
   mockUsers,
   mockMessages,
@@ -9,6 +11,9 @@ import MeticCard from "../components/ui/MetricCard/MetricCard";
 import ChatMessageCard from "../components/moderation/ChatMessageCard/ChatMessageCard";
 
 export default function Dashboard() {
+  const [message, setMessages] = useState(mockMessages);
+  const [users, setUsers] = useState(mockUsers);
+
   const openReports = mockReports.filter((report) => {
     return report.status == "new" || report.status == "reviewing";
   }).length;
@@ -24,6 +29,34 @@ export default function Dashboard() {
   const bannedUsers = mockUsers.filter((user) => {
     return user.isBanned;
   }).length;
+
+  function handleApproveMessage(messageId: string) {
+    setMessages((currentMessages) =>
+      currentMessages.map((message) => {
+        if (message.id !== messageId) {
+          return message;
+        }
+        return {
+          ...message,
+          status: "approved",
+        };
+      }),
+    );
+  }
+
+  function handleDeleteMessage(messageId: string) {
+    setMessages((currentMessages) =>
+      currentMessages.map((message) => {
+        if (message.id !== messageId) {
+          return message;
+        }
+        return {
+          ...message,
+          status: "deleted",
+        };
+      }),
+    );
+  }
 
   return (
     <section>
@@ -76,8 +109,8 @@ export default function Dashboard() {
         </div>
 
         <div className="chat-box-wrapper">
-          {mockMessages.map((msg) => {
-            const user = mockUsers.find((user) => {
+          {message.map((msg) => {
+            const user = users.find((user) => {
               return user.id === msg.userId;
             });
 
@@ -88,11 +121,14 @@ export default function Dashboard() {
             return (
               <ChatMessageCard
                 key={msg.id}
+                messageId={msg.id}
                 user={user.displayName}
                 status={msg.status}
                 risk={msg.riskLevel}
                 autoMod={msg.automodReasons}
                 message={msg.text}
+                onApproveMessage={handleApproveMessage}
+                onDeletedMessage={handleDeleteMessage}
               />
             );
           })}

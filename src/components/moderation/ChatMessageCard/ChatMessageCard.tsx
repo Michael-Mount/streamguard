@@ -1,22 +1,28 @@
 import "./index.css";
 
 type ChatMsgProps = {
+  messageId: string;
   message: string;
   status: string;
   risk: string;
   user: string;
   autoMod: string[];
+  onApproveMessage: (messageId: string) => void;
+  onDeletedMessage: (messageId: string) => void;
 };
 
 export default function ChatMessageCard({
   user,
+  messageId,
   message,
   status,
   risk,
   autoMod,
+  onApproveMessage,
+  onDeletedMessage,
 }: ChatMsgProps) {
   return (
-    <article className="message-card">
+    <article className={`message-card status-${status}`}>
       <header className="message-card__header">
         <div>
           <p className="message-card__user">{user}</p>
@@ -46,10 +52,18 @@ export default function ChatMessageCard({
       </div>
 
       <div className="message-card__actions">
-        <button className="action-button action-button--approve">
+        <button
+          className="action-button action-button--approve"
+          onClick={() => onApproveMessage(messageId)}
+        >
           Approve
         </button>
-        <button className="action-button">Delete</button>
+        <button
+          className="action-button"
+          onClick={() => onDeletedMessage(messageId)}
+        >
+          Delete
+        </button>
         <button className="action-button">Warn</button>
         <button className="action-button">Timeout</button>
         <button className="action-button action-button--danger">Ban</button>

@@ -65,6 +65,10 @@
   color: #fca5a5;
 }
 
+.status-deleted {
+  opacity: 40% !important;
+}
+
 .message-card__warnings {
   background: #111114;
   border: 1px solid #2a2a30;
