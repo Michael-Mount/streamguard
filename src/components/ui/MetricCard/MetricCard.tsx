@@ -4,7 +4,7 @@ import "./index.css";
 type MetricCardProps = {
   title: string;
   value: number | string;
-  desciprtion?: string;
+  description?: string;
 };
 
 export default function MetricCard(data: MetricCardProps) {
@@ -13,7 +13,7 @@ export default function MetricCard(data: MetricCardProps) {
       <h3 className="metric-card-title">{data.title}</h3>
       <div>
         <p className="metric-card-value">Current: {data.value}</p>
-        <p className="metric-card-description"> {data.desciprtion}</p>
+        <p className="metric-card-description"> {data.description}</p>
       </div>
     </div>
   );

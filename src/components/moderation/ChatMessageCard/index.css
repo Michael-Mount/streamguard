@@ -65,6 +65,10 @@
   color: #fca5a5;
 }
 
+.status-deleted {
+  opacity: 40% !important;
+}
+
 .message-card__warnings {
   background: #111114;
   border: 1px solid #2a2a30;
@@ -129,6 +133,7 @@
   background: rgba(239, 68, 68, 0.12);
   border-color: rgba(239, 68, 68, 0.4);
   color: #fca5a5;
+  margin-left: 10px;
 }
 
 .message-card:hover {

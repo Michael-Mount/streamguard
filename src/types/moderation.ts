@@ -26,6 +26,7 @@ export interface User {
   riskScore: number;
   isBanned: boolean;
   timeoutUntil?: string;
+  warningCount: number;
 }
 
 export interface Report {
