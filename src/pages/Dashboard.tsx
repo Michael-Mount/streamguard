@@ -12,6 +12,7 @@ import type { ChatMessage } from "../types/moderation";
 import MetricCard from "../components/ui/MetricCard/MetricCard";
 import ChatMessageCard from "../components/moderation/ChatMessageCard/ChatMessageCard";
 import { AutoMod } from "../lib/automod";
+import ChatComposer from "../components/moderation/ChatComposer/ChatComposer";
 
 export default function Dashboard() {
   const [messages, setMessages] = useState(mockMessages);
@@ -170,6 +171,7 @@ export default function Dashboard() {
         </div>
 
         <div className="chat-box-wrapper">
+          <ChatComposer onCreateMessage={handleCreateMessage} />
           {messages.map((msg) => {
             const user = users.find((user) => {
               return user.id === msg.userId;
