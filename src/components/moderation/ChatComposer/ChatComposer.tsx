@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import "./index.css";
 
-import type { User } from "../../../types/moderation";
+import { mockUsers } from "../../../data/mockModerationData";
 
 type ChatComposerProps = {
   onCreateMessage: (userId: string, text: string) => void;
@@ -39,10 +39,9 @@ export default function ChatComposer({ onCreateMessage }: ChatComposerProps) {
         value={selectedUserId}
         onChange={(event) => setSelectedUserId(event.target.value)}
       >
-        <option value="user-1">user-1</option>
-        <option value="user-2">user-2</option>
-        <option value="user-3">user-3</option>
-        <option value="user-4">user-4</option>
+        {mockUsers.map((user) => {
+          return <option value={user.id}>{user.displayName}</option>;
+        })}
       </select>
 
       <button className="chat-form__button" type="submit">

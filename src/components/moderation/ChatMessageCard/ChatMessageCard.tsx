@@ -9,6 +9,7 @@ type ChatMsgProps = {
   userId: string;
   user: string;
   autoMod: string[];
+  warningCount?: string;
   onApproveMessage: (messageId: string) => void;
   onDeleteMessage: (messageId: string) => void;
   onBanUser: (userId: string) => void;
@@ -25,6 +26,7 @@ export default function ChatMessageCard({
   risk,
   isBanned,
   autoMod,
+  warningCount,
   onApproveMessage,
   onDeleteMessage,
   onBanUser,
@@ -53,6 +55,7 @@ export default function ChatMessageCard({
           <span className={`badge badge--status-${status}`}>
             Banned: {isBanned ? "yes" : "no"}
           </span>
+          <span>Warnings Given: {warningCount}</span>
         </div>
       </header>
 

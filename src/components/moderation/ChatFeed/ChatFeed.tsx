@@ -28,9 +28,14 @@ export default function ChatFeed({
     <div className="chat-box-wrapper">
       <ChatComposer onCreateMessage={onCreateMessage} />
       {messages.map((msg) => {
+        if (messages.length === 0) {
+          return <>No Chat Messages Yet.</>;
+        }
         const user = users.find((user) => {
           return user.id === msg.userId;
         });
+
+        const stringWarning = user?.warningCount.toString();
 
         if (!user) {
           return null;
@@ -43,6 +48,7 @@ export default function ChatFeed({
             user={user.displayName}
             userId={user.id}
             isBanned={user.isBanned}
+            warningCount={stringWarning}
             status={msg.status}
             risk={msg.riskLevel}
             autoMod={msg.automodReasons}
