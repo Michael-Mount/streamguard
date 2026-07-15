@@ -6,7 +6,7 @@ import "./index.css";
 type ChatFeedProps = {
   messages: ChatMessage[];
   users: User[];
-  onCreateMessage: (text: string) => void;
+  onCreateMessage: (userId: string, text: string) => void;
   onApproveMessage: (messageId: string) => void;
   onDeleteMessage: (messageId: string) => void;
   onBanUser: (userId: string) => void;

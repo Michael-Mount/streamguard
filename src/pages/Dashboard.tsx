@@ -10,9 +10,7 @@ import {
 import type { ChatMessage } from "../types/moderation";
 
 import MetricCard from "../components/ui/MetricCard/MetricCard";
-
 import { analyzeMessage } from "../lib/automod";
-
 import ChatFeed from "../components/moderation/ChatFeed/ChatFeed";
 
 export default function Dashboard() {
@@ -103,12 +101,12 @@ export default function Dashboard() {
     );
   }
 
-  function handleCreateMessage(text: string) {
+  function handleCreateMessage(userId: string, text: string) {
     const moderation = analyzeMessage(text);
 
     const newMessage: ChatMessage = {
       id: `msg-${Date.now()}`,
-      userId: "user-2",
+      userId: userId,
       channelId: "channel-1",
       text,
       createdAt: new Date().toISOString(),
