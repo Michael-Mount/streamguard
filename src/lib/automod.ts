@@ -7,7 +7,7 @@ type AutoModResult = {
   automodReasons: string[];
 };
 
-export function AutoMod(text: string): AutoModResult {
+export function analyzeMessage(text: string): AutoModResult {
   const normalizedText = text.toLocaleLowerCase();
 
   let riskScore = 1;
@@ -30,7 +30,7 @@ export function AutoMod(text: string): AutoModResult {
   }
   //rule 4
 
-  if (text === text.toUpperCase() && text.length < 8) {
+  if (text === text.toUpperCase() && text.length > 8) {
     riskScore = riskScore + 15;
     automodReasons.push("Aggressive Message");
   }

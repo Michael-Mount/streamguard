@@ -11,7 +11,7 @@ import type { ChatMessage } from "../types/moderation";
 
 import MetricCard from "../components/ui/MetricCard/MetricCard";
 import ChatMessageCard from "../components/moderation/ChatMessageCard/ChatMessageCard";
-import { AutoMod } from "../lib/automod";
+import { analyzeMessage } from "../lib/automod";
 import ChatComposer from "../components/moderation/ChatComposer/ChatComposer";
 
 export default function Dashboard() {
@@ -103,7 +103,7 @@ export default function Dashboard() {
   }
 
   function handleCreateMessage(text: string) {
-    const moderation = AutoMod(text);
+    const moderation = analyzeMessage(text);
 
     const newMessage: ChatMessage = {
       id: `msg-${Date.now()}`,
@@ -132,7 +132,7 @@ export default function Dashboard() {
         />
         <MetricCard
           title="chat messages"
-          value={mockMessages.length}
+          value={messages.length}
           description="total messages this stream"
         />
         <MetricCard
