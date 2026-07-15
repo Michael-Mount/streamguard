@@ -7,8 +7,12 @@ import {
   mockAppeals,
 } from "../data/mockModerationData";
 
+import type { ChatMessage } from "../types/moderation";
+
 import MetricCard from "../components/ui/MetricCard/MetricCard";
 import ChatMessageCard from "../components/moderation/ChatMessageCard/ChatMessageCard";
+import { AutoMod } from "../lib/automod";
+import ChatComposer from "../components/moderation/ChatComposer/ChatComposer";
 
 export default function Dashboard() {
   const [messages, setMessages] = useState(mockMessages);
@@ -98,6 +102,24 @@ export default function Dashboard() {
     );
   }
 
+  function handleCreateMessage(text: string) {
+    const moderation = AutoMod(text);
+
+    const newMessage: ChatMessage = {
+      id: `msg-${Date.now()}`,
+      userId: "user-2",
+      channelId: "channel-1",
+      text,
+      createdAt: new Date().toISOString(),
+      riskLevel: moderation.riskLevel,
+      riskScore: moderation.riskScore,
+      status: moderation.status,
+      automodReasons: moderation.automodReasons,
+    };
+
+    setMessages((currentMessages) => [newMessage, ...currentMessages]);
+  }
+
   return (
     <section>
       <h1> Dashboard</h1>
@@ -149,6 +171,7 @@ export default function Dashboard() {
         </div>
 
         <div className="chat-box-wrapper">
+          <ChatComposer onCreateMessage={handleCreateMessage} />
           {messages.map((msg) => {
             const user = users.find((user) => {
               return user.id === msg.userId;
