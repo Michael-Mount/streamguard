@@ -10,9 +10,8 @@ import {
 import type { ChatMessage } from "../types/moderation";
 
 import MetricCard from "../components/ui/MetricCard/MetricCard";
-import ChatMessageCard from "../components/moderation/ChatMessageCard/ChatMessageCard";
-import { AutoMod } from "../lib/automod";
-import ChatComposer from "../components/moderation/ChatComposer/ChatComposer";
+import { analyzeMessage } from "../lib/automod";
+import ChatFeed from "../components/moderation/ChatFeed/ChatFeed";
 
 export default function Dashboard() {
   const [messages, setMessages] = useState(mockMessages);
@@ -102,12 +101,12 @@ export default function Dashboard() {
     );
   }
 
-  function handleCreateMessage(text: string) {
-    const moderation = AutoMod(text);
+  function handleCreateMessage(userId: string, text: string) {
+    const moderation = analyzeMessage(text);
 
     const newMessage: ChatMessage = {
       id: `msg-${Date.now()}`,
-      userId: "user-2",
+      userId: userId,
       channelId: "channel-1",
       text,
       createdAt: new Date().toISOString(),
@@ -132,7 +131,7 @@ export default function Dashboard() {
         />
         <MetricCard
           title="chat messages"
-          value={mockMessages.length}
+          value={messages.length}
           description="total messages this stream"
         />
         <MetricCard
@@ -170,37 +169,16 @@ export default function Dashboard() {
           </div>
         </div>
 
-        <div className="chat-box-wrapper">
-          <ChatComposer onCreateMessage={handleCreateMessage} />
-          {messages.map((msg) => {
-            const user = users.find((user) => {
-              return user.id === msg.userId;
-            });
-
-            if (!user) {
-              return null;
-            }
-
-            return (
-              <ChatMessageCard
-                key={msg.id}
-                messageId={msg.id}
-                user={user.displayName}
-                userId={user.id}
-                isBanned={user.isBanned}
-                status={msg.status}
-                risk={msg.riskLevel}
-                autoMod={msg.automodReasons}
-                message={msg.text}
-                onApproveMessage={handleApproveMessage}
-                onDeleteMessage={handleDeleteMessage}
-                onBanUser={handleBanUser}
-                onHandleTimeout={handleTimeoutUser}
-                onWarning={handleWarningUser}
-              />
-            );
-          })}
-        </div>
+        <ChatFeed
+          messages={messages}
+          users={users}
+          onApproveMessage={handleApproveMessage}
+          onBanUser={handleBanUser}
+          onCreateMessage={handleCreateMessage}
+          onDeleteMessage={handleDeleteMessage}
+          onHandleTimeout={handleTimeoutUser}
+          onWarning={handleWarningUser}
+        />
       </section>
     </section>
   );

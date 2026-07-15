@@ -2,12 +2,15 @@ import { useState } from "react";
 
 import "./index.css";
 
+import { mockUsers } from "../../../data/mockModerationData";
+
 type ChatComposerProps = {
-  onCreateMessage: (text: string) => void;
+  onCreateMessage: (userId: string, text: string) => void;
 };
 
 export default function ChatComposer({ onCreateMessage }: ChatComposerProps) {
   const [text, setText] = useState("");
+  const [selectedUserId, setSelectedUserId] = useState("user-1");
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -17,7 +20,7 @@ export default function ChatComposer({ onCreateMessage }: ChatComposerProps) {
     if (!trimmedText) {
       return;
     }
-    onCreateMessage(trimmedText);
+    onCreateMessage(selectedUserId, trimmedText);
 
     setText("");
   }
@@ -30,6 +33,16 @@ export default function ChatComposer({ onCreateMessage }: ChatComposerProps) {
         onChange={(event) => setText(event.target.value)}
         placeholder="Send a test chat message..."
       />
+
+      <select
+        name="user-select"
+        value={selectedUserId}
+        onChange={(event) => setSelectedUserId(event.target.value)}
+      >
+        {mockUsers.map((user) => {
+          return <option value={user.id}>{user.displayName}</option>;
+        })}
+      </select>
 
       <button className="chat-form__button" type="submit">
         Chat
